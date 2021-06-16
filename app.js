@@ -18,7 +18,7 @@ require("http").createServer((req, res) => {
 		console.error(err);
 	}
 }).listen(config.port, null, null, _ => {
-	console.log(`GitHub webhook server started on port ${config.port}`);
+	console.log(`GitHub webhook server started on port ${config.port || 80}`);
 });
 
 function handleRequest(req, res) {
@@ -51,10 +51,6 @@ function respond(res, status) {
 }
 
 function handlePayload(body, signature) {
-	if(JSON.parse(body).repository.name != config.repositoryName) {
-		return;
-	}
-
 	signature = Buffer.from(signature || "", "utf8");
 	const hmac = crypto.createHmac("sha256", config.secret);
 	const digest = Buffer.from(`sha256=${hmac.update(body).digest("hex")}`, "utf8");
