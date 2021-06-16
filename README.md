@@ -30,7 +30,8 @@ Pathname to handle webhook events on:
   "pathname": String
 ```
 
-> In the GitHub webhook settings, set up the endpoint according to the following scheme: *[protocol]://[host]:[port][pathname].
+> In the GitHub webhook settings, set up the endpoint according to the following scheme:\
+> *[protocol]://[host]:[port][pathname]*.
 
 #### Secret <sub>optional</sub>
 
