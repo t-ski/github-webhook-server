@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const {join, extname} = require("path");
 
 const configPath = join(process.cwd(), process.argv[2]);
