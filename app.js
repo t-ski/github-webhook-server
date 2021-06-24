@@ -1,4 +1,4 @@
-const {join, extname} = require("path");
+const {join, extname, dirname} = require("path");
 
 const configPath = join(process.cwd(), process.argv[2]);
 
@@ -65,7 +65,7 @@ function handlePayload(body, signature) {
 		return;
 	}
 	exec(config.resolve.commands, {
-		cwd: config.resolve.cwd || ""
+		cwd: join(process.cwd(), dirname(process.argv[2]), config.resolve.cwd) || ""
 	}, (err, stdout, stderr) => {
 		if(err) {
 			console.error(err);
