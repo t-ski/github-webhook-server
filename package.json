@@ -4,6 +4,9 @@
   "description": "GitHub webhook endpoint server application",
   "main": "app.js",
   "bin": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/t-ski/github-webhook-server.git"

@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 const {join, extname} = require("path");
 
 const configPath = join(process.cwd(), process.argv[2]);
@@ -8,7 +6,7 @@ if(extname(configPath).toLowerCase() != ".json") {
 	throw new ReferenceError("No path to config JSON file given")
 }
 
-const config = require();
+const config = require(configPath);
 
 var crypto = require("crypto");
 const {exec} = require("child_process");
@@ -62,7 +60,6 @@ function handlePayload(body, signature) {
 	}
 
 	// IS VALID
-	console.log("web hook successfully triggered due to push\n");
 
 	if(!config.resolve.commands) {
 		return;
