@@ -7,7 +7,8 @@ if(extname(configPath).toLowerCase() != ".json") {
 }
 
 const config = require(configPath);
-
+const CWD = join(process.cwd(), dirname(process.argv[2]), config.resolve.cwd);
+console.log(CWD);
 var crypto = require("crypto");
 const {exec} = require("child_process");
 
@@ -65,7 +66,7 @@ function handlePayload(body, signature) {
 		return;
 	}
 	exec(config.resolve.commands, {
-		cwd: join(process.cwd(), dirname(process.argv[2]), config.resolve.cwd) || ""
+		cwd: CWD || ""
 	}, (err, stdout, stderr) => {
 		if(err) {
 			console.error(err);
