@@ -1,9 +1,11 @@
 {
   "name": "github-webhook-server",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "GitHub webhook endpoint server application",
-  "main": "app.js",
-  "bin": "app.js",
+  "main": "src/app.js",
+  "bin": {
+    "github-webhook-server": "src/cli.js"
+  },
   "scripts": {
     "start": "node app.js"
   },

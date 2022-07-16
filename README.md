@@ -6,7 +6,7 @@ A simple GitHub webhook endpoint server for handling hooked events. Read more ab
 
 ## Installation
 
-npm install github-webhook-server -g
+npm i github-webhook-server -g
 
 ## Usage
 
