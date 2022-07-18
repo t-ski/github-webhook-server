@@ -1,0 +1,42 @@
+{
+    "extends": [
+        "eslint:recommended"
+    ],
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "node": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 13,
+        "sourceType": "module"
+    },
+    "rules": {
+        "indent": [
+            2,
+            "tab"
+        ],
+        "linebreak-style": [
+            2,
+            "unix"
+        ],
+        "quotes": [
+            2,
+            "double"
+        ],
+        "semi": [
+            2,
+            "always"
+        ],
+        "prefer-arrow-callback": 2,
+        "no-mixed-spaces-and-tabs": 0,
+        "no-irregular-whitespace": 0,
+        "no-unused-vars": [
+            2,
+            {
+                "argsIgnorePattern": "_",
+                "varsIgnorePattern": "PARSEL"
+            }
+        ]
+    }
+}

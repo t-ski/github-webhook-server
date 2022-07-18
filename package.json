@@ -2,12 +2,13 @@
   "name": "github-webhook-server",
   "version": "0.1.0",
   "description": "GitHub webhook endpoint server application",
-  "main": "src/app.js",
+  "main": "lib/app.js",
   "bin": {
-    "github-webhook-server": "src/cli.js"
+    "github-webhook-server": "lib/cli.js"
   },
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "lint": "./node_modules/.bin/eslint --fix ./lib/"
   },
   "repository": {
     "type": "git",
@@ -18,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/t-ski/github-webhook-server/issues"
   },
-  "homepage": "https://github.com/t-ski/github-webhook-server#readme"
+  "homepage": "https://github.com/t-ski/github-webhook-server#readme",
+  "devDependencies": {
+    "eslint": "^8.20.0"
+  }
 }
