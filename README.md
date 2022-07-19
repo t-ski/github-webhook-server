@@ -1,70 +1,74 @@
-(PRELIMINARY README)
-
 # github-webhook-server
 
-A simple GitHub webhook endpoint server for handling hooked events. Read more about [GitHub webhooks](https://docs.github.com/en/developers/webhooks-and-events/webhooks/creating-webhooks).
+Multi-channel webhook server for [GitHub events](https://docs.github.com/en/developers/webhooks-and-events/webhooks/creating-webhooks).
 
 ## Installation
 
-npm i github-webhook-server -g
-
-## Usage
-
-### Configuration
-
-Set up a JSON file to store webhook related configuration parameter.
-
-#### Port
-
-Port to have webhook server listen on:
-
-``` js
-  "port": Number`
+``` cli
+npm i -G t-ski/github-webhook-server
 ```
 
-#### Pathname
+> Install **github-webhook-server** globally in order to work with the presented CLI interface. Project local installations must prepend subsequently stated commands with `npx`.
 
-Pathname to handle webhook events on:
+## CLI Usage
 
-``` js
-  "pathname": String
+``` cli
+github-webhook-server [(--start|-S)=./] [(--stop|-T)] [(--monitor|-M)] [--help]
 ```
 
-> In the GitHub webhook settings, set up the endpoint according to the following scheme:\
-> *[protocol]://[host]:[port][pathname]*.
+| Parameter | Shorthand | Description |
+| --------- | --------- | ----------- |
+| **--start** | **-S** | *Start a webhook server with the given config JSON* |
+| **--stop** | **-T** | *Stop (terminate) a webhook server given the associated port* |
+| **--monitor** | **-M** | *Monitor active webhook servers* |
+| **--help** | | *Display help text* |
 
-#### Secret <sub>optional</sub>
+## Setup
 
-High entropy secret for securing and validating webhook events as set up in the GitHub webhook settings:
+A single webhook server is associated with a statically consumed config file (*.json). A config file contains both globally and hook specific information upon which the server instance is created and maintained.
 
-``` js
-  "secret": String
+### Globals
+
+Global properties comprise server configurations that affect the spanning context.
+
+``` json
+{
+  "name": "my-hook",
+  "port": 1234
+}
 ```
 
-#### Resolve action <sub>optional</sub>
+| Property | Desciption | Default |
+| -------- | ---------- | ------- |
+| `name` | *Name to associate with server process* | `null` |
+| `port` | *Port to have the server listen on* | `9797` |
 
-Resolve action information sub object.
+### Hook channels
 
-``` js
-  "resolve": {
-    "commands": String,
-    "cwd": String
-  }
+Since the server can handle many hooks at once, each individual hook must be configured to the global `hooks` property array.  
+
+``` json
+{
+  "hooks": [
+    {
+      "endpoint": "/endpoint",
+      "secret": "abc...xyz",
+      "cmd": "git pull && npm update",
+      "module": "../app/hook.js",
+      "cwd": "../app/"
+    }, …
+  ]
+}
 ```
 
-The resolve object may state the following parameter:\
+| Property | Desciption | Default |
+| -------- | ---------- | ------- |
+| `endpoint` | *Hook associated endpoint / request pathname as defined on GitHub* | `null` |
+| `secret` | *Hook individual secret as present on GitHub* | `null` |
+| `cmd` | *CLI command to perform upon hook activation* | `null` |
+| `module` | *JS module to execute / interpret upon hook activation* | `null` |
+| `cwd` | *Working directory of the hook bound dynamics* | `./` |
 
-`"commands"`  CLI command(s) to execute upon successful and validated webhook event
+## 
 
-`"cwd"`       Current working directory to use for command(s) execution (relative to application start directory)
-
-## Usage
-
-Start the webhook server providing the configuration file using the following command scheme:
-
-`github-webhook-server [relative-path-to-config-JSON]`
-
-> We recommend starting the server as a demon or using a utility such as [forever](https://www.npmjs.com/package/forever) for keeping the server process alive.
-
-Once the application starts up successfully, the push a test commit to the linked repository in order to check if the webhook is set up correctly.
-Any activated event will cause the provided command(s) to execute accordingly.
+<sub>© Thassilo Martin Schiepanski</sub>
