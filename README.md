@@ -1,4 +1,4 @@
-# github-webhook-server
+# Github Webhook Server
 
 Multi-channel webhook server for [GitHub events](https://docs.github.com/en/developers/webhooks-and-events/webhooks/creating-webhooks).
 
